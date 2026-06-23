@@ -1,0 +1,29 @@
+kind: Service
+apiVersion: v1
+metadata: 
+  name: nginx-service
+  namespace: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP  
+
+
+# | Service Type | Accessible From                    |
+# | ------------ | ---------------------------------- |
+# | ClusterIP    | Inside cluster only                |
+# | NodePort     | Outside via NodeIP:Port            |
+# | LoadBalancer | External load balancer             |
+# | ExternalName | routes to an outside resource      |
+
+
+# kubectl apply -f service.yaml
+
+# Port forwarding only in kinD cluster
+# kubectl port-forward service/nginx-service -n nginx 80:80 --address=0.0.0.0
+
+# kubectl get svc
